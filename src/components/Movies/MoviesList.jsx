@@ -11,8 +11,10 @@ export default class MovieList extends Component {
     };
   }
 
-  componentDidMount() {
-    const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&language=ru-RU`;
+  getMovies = (filters) => {
+    const { sort_by } = filters;
+
+    const link = `${API_URL}/discover/movie?api_key=${API_KEY_3}&language=uk-UA&sort_by=${sort_by}`;
     fetch(link)
       .then(response => {
         return response.json();
@@ -22,10 +24,21 @@ export default class MovieList extends Component {
           movies: data.results
         });
       });
+  };
+
+  componentDidMount() {
+    this.getMovies(this.props.filters);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.filters.sort_by !== this.props.filters.sort_by) {
+      this.getMovies(this.props.filters);
+    }
   }
 
   render() {
     const { movies } = this.state;
+    //console.log(this.props.filters);
     return (
       <div className="row">
         {movies.map(movie => {
