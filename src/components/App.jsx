@@ -37,7 +37,7 @@ export default class App extends React.Component {
           <div className="col-4">
             <div className="card" style={{ width: "100%" }}>
               <div className="card-body">
-                <h3>Фильтры:</h3>
+                <h3>Фильтри:</h3>
                 <Filters
                   filters={filters}
                   page={page}
