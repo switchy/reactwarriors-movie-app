@@ -1,16 +1,24 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import queryString from 'query-string';
 import {API_KEY_3, API_URL} from "../../api/api";
 
-class WithGenres extends React.Component {
+class WithGenres extends React.PureComponent {
   constructor() {
     super();
 
     this.state = {
       genres: []
     };
+  }
 
-    const link = `${API_URL}/genre/movie/list?api_key=${API_KEY_3}&language=uk-UA`;
+  componentDidMount() {
+    let linkQueryParams = {
+      api_key: API_KEY_3,
+      language: "uk-UA"
+    };
+
+    const link = `${API_URL}/genre/movie/list?${queryString.stringify(linkQueryParams)}`;
 
     fetch(link)
       .then(response => {
@@ -24,9 +32,19 @@ class WithGenres extends React.Component {
 
   }
 
-  render() {
-    const { onChangeFilters } = this.props;
+  onChange = (event) => {
+    this.props.onChangeFilters({
+      target: {
+        name: "genres",
+        value: event.target.checked
+          ? [...this.props.genres, event.target.value]
+          : this.props.genres.filter((genre) => (genre !== event.target.value))
+      }
+    })
+  };
 
+  render() {
+    const { genres } = this.props;
     return (
       <div className="form-group">
         <div>Жанр:</div>
@@ -38,7 +56,8 @@ class WithGenres extends React.Component {
               type="checkbox"
               value={option.id}
               id={`genreCheck${option.id}`}
-              onChange={onChangeFilters}
+              onChange={this.onChange}
+              checked={genres.includes(String(option.id))}
             />
             <label
               className="form-check-label"
@@ -54,7 +73,8 @@ class WithGenres extends React.Component {
 }
 
 WithGenres.propTypes = {
-  onChangeFilters: PropTypes.func.isRequired
+  onChangeFilters: PropTypes.func.isRequired,
+  genres: PropTypes.array.isRequired
 };
 
 export default WithGenres;

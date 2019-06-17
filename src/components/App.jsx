@@ -9,38 +9,21 @@ export default class App extends React.Component {
     this.initialState = {
       filters: {
         sort_by: "popularity.desc",
-        year: new Date().getFullYear().toString(),
+        year: String(new Date().getFullYear()),
         genres: []
       },
       page: 1,
-      lastPage: null
+      total_pages: null
     };
 
-    this.state = Object.assign({}, this.initialState);
+    this.state = { ...this.initialState };
   }
 
   onChangeFilters = (event) => {
-    let newFilters = {};
-    if (event.target.name === 'genres') {
-      //Для genres йде список значень
-      let genres = [...this.state.filters.genres];
-      if (event.target.checked) {
-        genres.push(event.target.value);
-      } else {
-        genres = genres.filter((value) => (value !== event.target.value));
-      }
-
-      newFilters = {
-        ...this.state.filters,
-        genres: genres
-      }
-
-    } else {
-      newFilters = {
-        ...this.state.filters,
-        [event.target.name]: event.target.value
-      };
-    }
+    let newFilters = {
+      ...this.state.filters,
+      [event.target.name]: event.target.value
+    };
 
     this.setState({filters: newFilters});
   };
@@ -55,25 +38,26 @@ export default class App extends React.Component {
     this.setState({ ...this.initialState});
   };
 
-  setLastPage = (lastPage) => {
+  setTotalPages = (total_pages) => {
     this.setState({
-      lastPage: lastPage
+      total_pages: total_pages
     })
   };
 
   render() {
-    const { filters, page, lastPage } = this.state;
+    const { filters, page, total_pages } = this.state;
     return (
       <div className="container">
         <div className="row mt-4">
           <div className="col-4">
             <div className="card" style={{ width: "100%" }}>
               <div className="card-body">
+                {process.env.R}
                 <h3>Фильтри:</h3>
                 <Filters
                   filters={filters}
                   page={page}
-                  lastPage={lastPage}
+                  total_pages={total_pages}
                   onChangeFilters={this.onChangeFilters}
                   onResetFilters={this.onResetFilters}
                   onChangePage={this.onChangePage}
@@ -87,7 +71,7 @@ export default class App extends React.Component {
               filters={filters}
               page={page}
               onChangePage={this.onChangePage}
-              handleEndPage={this.setLastPage}
+              onChangeTotalPages={this.setTotalPages}
             />
           </div>
         </div>

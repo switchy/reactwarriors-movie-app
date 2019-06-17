@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import UIFormRowSelect from '../UIComponents/UIFormRowSelect';
 
-class SortBy extends React.Component {
+class SortBy extends React.PureComponent {
 
   static defaultProps = {
     options: [
@@ -27,22 +28,13 @@ class SortBy extends React.Component {
   render() {
     const { sort_by, onChangeFilters, options } = this.props;
     return (
-      <div className="form-group">
-        <label htmlFor="sort_by">Сортувати за:</label>
-        <select
-          className="form-control"
-          id="sort_by"
-          name="sort_by"
-          value={sort_by}
-          onChange={onChangeFilters}
-        >
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
+      <UIFormRowSelect
+        label="Сортувати за"
+        name="sort_by"
+        value={sort_by}
+        options={options}
+        onChange={onChangeFilters}
+      />
     );
   }
 }

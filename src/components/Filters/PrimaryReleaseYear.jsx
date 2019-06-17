@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import UIFormRowSelect from '../UIComponents/UIFormRowSelect';
 
-class PrimaryReleaseYear extends React.Component {
+class PrimaryReleaseYear extends React.PureComponent {
 
   constructor() {
     super();
@@ -11,7 +12,7 @@ class PrimaryReleaseYear extends React.Component {
     for(let i = new Date().getFullYear(); i > 1940; i--) {
       this.yearsOptions.push({
         label: i,
-        value: i.toString()
+        value: String(i)
       })
     }
   }
@@ -19,22 +20,13 @@ class PrimaryReleaseYear extends React.Component {
   render() {
     const { year, onChangeFilters } = this.props;
     return (
-      <div className="form-group">
-        <label htmlFor="year">Рік виходу:</label>
-        <select
-          className="form-control"
-          id="year"
-          name="year"
-          value={year}
-          onChange={onChangeFilters}
-        >
-          {this.yearsOptions.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
+      <UIFormRowSelect
+        label="Рік виходу"
+        name="year"
+        value={year}
+        options={this.yearsOptions}
+        onChange={onChangeFilters}
+      />
     );
   }
 }

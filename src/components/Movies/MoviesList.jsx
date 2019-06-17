@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import MovieItem from "./MovieItem";
+import queryString from 'query-string';
 import { API_URL, API_KEY_3 } from "../../api/api";
 
 class MovieList extends Component {
@@ -15,16 +16,20 @@ class MovieList extends Component {
   getMovies = (filters, page=1) => {
     const { sort_by, year, genres } = filters;
 
-    let link =
-      `${API_URL}/discover/movie?api_key=${API_KEY_3}`
-      +`&language=uk-UA&vote_count.gte=500`
-      +`&sort_by=${sort_by}`
-      +`&page=${page}`
-      +`&primary_release_year=${year}`;
+    let linkQueryParams = {
+      api_key: API_KEY_3,
+      language: "uk-UA",
+      "vote_count.gte": 500,
+      sort_by: sort_by,
+      page: page,
+      primary_release_year: year
+    };
 
     if (genres.length) {
-      link = link + '&with_genres=' + genres.join(",")
+      linkQueryParams.with_genres = genres.join(",")
     }
+
+    let link = `${API_URL}/discover/movie?${queryString.stringify(linkQueryParams)}`;
 
     fetch(link)
       .then(response => {
@@ -35,7 +40,7 @@ class MovieList extends Component {
           movies: data.results
         });
 
-        this.props.handleEndPage(data.total_pages)
+        this.props.onChangeTotalPages(data.total_pages)
       });
   };
 
@@ -44,26 +49,12 @@ class MovieList extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    let needReloadFilters = false;
-
     if (prevProps.page !== this.props.page) {
       this.getMovies(this.props.filters, this.props.page);
+      return;
     }
 
-    if (prevProps.filters.sort_by !== this.props.filters.sort_by) {
-      needReloadFilters = true
-    }
-
-    if (prevProps.filters.year !== this.props.filters.year) {
-      needReloadFilters = true
-    }
-
-    if (this.props.filters.genres.length !== prevProps.filters.genres.length
-      || !this.props.filters.genres.every( e => prevProps.filters.genres.includes(e))) {
-      needReloadFilters = true
-    }
-
-    if (needReloadFilters) {
+    if (prevProps.filters !== this.props.filters) {
       this.props.onChangePage(1);
       this.getMovies(this.props.filters, 1);
       return;
@@ -79,24 +70,23 @@ class MovieList extends Component {
           Нічого не знайдено.
         </div>
       );
-    } else {
-      return (
-        <div className="row">
-          {movies.map(movie => {
-            return (
-              <div key={movie.id} className="col-6 mb-4">
-                <MovieItem item={movie}/>
-              </div>
-            );
-          })}
-        </div>
-      );
     }
+    return (
+      <div className="row">
+        {movies.map(movie => {
+          return (
+            <div key={movie.id} className="col-6 mb-4">
+              <MovieItem item={movie}/>
+            </div>
+          );
+        })}
+      </div>
+    );
   }
 }
 
 MovieList.propTypes = {
-  movies: PropTypes.object
+  movies: PropTypes.array
 };
 
 export default MovieList;
