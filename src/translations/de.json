@@ -1,0 +1,16 @@
+{
+  "app.filters": "Filter",
+  "filters.SortBy": "Sortieren nach",
+  "filters.PrimaryReleaseYear": "Erscheinungsdatum",
+  "filters.Genre": "Genre",
+  "filters.buttonBack": "Rückwärts",
+  "filters.buttonNext": "Vorwärts",
+  "filters.buttonReset": "Filter zurücksetzen",
+  "filters.pages": "{n} aus {m}",
+  "sortby.opts.popularity.desc": "Beliebt absteigend",
+  "sortby.opts.popularity.asc": "Beliebt aufsteigend",
+  "sortby.opts.vote_average.desc": "Bewertung absteigend",
+  "sortby.opts.vote_average.asc": "Bewertung aufsteigend",
+  "movieitem.Rating": "Bewertung",
+  "movielist.NotFound": "Nichts gefunden."
+}

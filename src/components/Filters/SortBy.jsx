@@ -1,35 +1,42 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import { injectIntl } from 'react-intl';
 import UIFormRowSelect from '../UIComponents/UIFormRowSelect';
 
 class SortBy extends React.PureComponent {
 
-  static defaultProps = {
-    options: [
+  constructor() {
+    super();
+    this.listOptions = []
+  };
+
+  componentWillMount() {
+    this.listOptions = [
       {
-        label: "Популярні за спаданням",
+        label: this.props.intl.formatMessage({id: "sortby.opts.popularity.desc", defaultMessage: "Popular by descending"}),
         value: "popularity.desc"
       },
       {
-        label: "Популярні за зростанням",
+        label: this.props.intl.formatMessage({id: "sortby.opts.popularity.asc", defaultMessage: "Popular ascending"}),
         value: "popularity.asc"
       },
       {
-        label: "Рейтинг за спаданням",
+        label: this.props.intl.formatMessage({id: "sortby.opts.vote_average.desc", defaultMessage: "Rating by descending"}),
         value: "vote_average.desc"
       },
       {
-        label: "Рейтинг за зростанням",
+        label: this.props.intl.formatMessage({id: "sortby.opts.vote_average.asc", defaultMessage: "Rating ascending"}),
         value: "vote_average.asc"
       },
-    ]
+    ];
   };
 
   render() {
-    const { sort_by, onChangeFilters, options } = this.props;
+    const { sort_by, onChangeFilters } = this.props;
+    const options = this.listOptions;
     return (
       <UIFormRowSelect
-        label="Сортувати за"
+        label={this.props.intl.formatMessage({id:"filters.SortBy", defaultMessage: "Sort by"})}
         name="sort_by"
         value={sort_by}
         options={options}
@@ -44,4 +51,4 @@ SortBy.propTypes = {
   onChangeFilters: PropTypes.func.isRequired
 };
 
-export default SortBy;
+export default injectIntl(SortBy);

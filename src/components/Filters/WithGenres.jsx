@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import {API_KEY_3, API_URL} from "../../api/api";
 
 class WithGenres extends React.PureComponent {
@@ -15,7 +16,7 @@ class WithGenres extends React.PureComponent {
   componentDidMount() {
     let linkQueryParams = {
       api_key: API_KEY_3,
-      language: "uk-UA"
+      language: this.props.intl.locale
     };
 
     const link = `${API_URL}/genre/movie/list?${queryString.stringify(linkQueryParams)}`;
@@ -47,7 +48,7 @@ class WithGenres extends React.PureComponent {
     const { genres } = this.props;
     return (
       <div className="form-group">
-        <div>Жанр:</div>
+        <div><FormattedMessage id="filters.Genre" defaultMessage="Genre"/>:</div>
         {this.state.genres.map((option) => (
           <div className="form-check" key={option.id}>
             <input
@@ -77,4 +78,4 @@ WithGenres.propTypes = {
   genres: PropTypes.array.isRequired
 };
 
-export default WithGenres;
+export default injectIntl(WithGenres);

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import { injectIntl } from 'react-intl';
 import UIFormRowSelect from '../UIComponents/UIFormRowSelect';
 
 class PrimaryReleaseYear extends React.PureComponent {
@@ -21,7 +22,7 @@ class PrimaryReleaseYear extends React.PureComponent {
     const { year, onChangeFilters } = this.props;
     return (
       <UIFormRowSelect
-        label="Рік виходу"
+        label={this.props.intl.formatMessage({id:"filters.PrimaryReleaseYear", defaultMessage: "Release year"})}
         name="year"
         value={year}
         options={this.yearsOptions}
@@ -36,4 +37,4 @@ PrimaryReleaseYear.propTypes = {
   onChangeFilters: PropTypes.func.isRequired
 };
 
-export default PrimaryReleaseYear;
+export default injectIntl(PrimaryReleaseYear);

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import MovieItem from "./MovieItem";
 import queryString from 'query-string';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import { API_URL, API_KEY_3 } from "../../api/api";
 
 class MovieList extends Component {
@@ -18,8 +19,8 @@ class MovieList extends Component {
 
     let linkQueryParams = {
       api_key: API_KEY_3,
-      language: "uk-UA",
-      "vote_count.gte": 500,
+      language: this.props.intl.locale,
+      "vote_count.gte": 200,
       sort_by: sort_by,
       page: page,
       primary_release_year: year
@@ -67,7 +68,7 @@ class MovieList extends Component {
     if (!movies.length) {
       return (
         <div className="alert alert-warning">
-          Нічого не знайдено.
+          <FormattedMessage id="movielist.NotFound" defaultMessage="Nothing was found."/>
         </div>
       );
     }
@@ -89,4 +90,4 @@ MovieList.propTypes = {
   movies: PropTypes.array
 };
 
-export default MovieList;
+export default injectIntl(MovieList);

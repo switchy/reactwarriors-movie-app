@@ -1,0 +1,16 @@
+{
+  "app.filters": "Фільтри",
+  "filters.SortBy": "Сортувати за",
+  "filters.PrimaryReleaseYear": "Рік виходу",
+  "filters.Genre": "Жанр",
+  "filters.buttonBack": "Назад",
+  "filters.buttonNext": "Вперед",
+  "filters.buttonReset": "Скинути фільтри",
+  "filters.pages": "{n} із {m}",
+  "sortby.opts.popularity.desc": "Популярні за спаданням",
+  "sortby.opts.popularity.asc": "Популярні за зростанням",
+  "sortby.opts.vote_average.desc": "Рейтинг за спаданням",
+  "sortby.opts.vote_average.asc": "Рейтинг за зростанням",
+  "movieitem.Rating": "Рейтинг",
+  "movielist.NotFound": "Нічого не знайдено."
+}

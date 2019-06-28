@@ -2,6 +2,7 @@ import React from "react";
 import SortBy from "./SortBy";
 import PrimaryReleaseYear from "./PrimaryReleaseYear";
 import WithGenres from "./WithGenres";
+import { injectIntl, FormattedMessage } from 'react-intl';
 import PropTypes from "prop-types";
 
 class Filters extends React.Component {
@@ -32,7 +33,7 @@ class Filters extends React.Component {
             className="btn btn-secondary w-100"
             onClick={onResetFilters}
           >
-            Скинути фільтри
+            <FormattedMessage id="filters.buttonReset" defaultMessage="Reset filters"/>
           </button>
         </div>
         <div className="btn-group w-100">
@@ -42,7 +43,7 @@ class Filters extends React.Component {
             disabled={page <= 1}
             onClick={this.onClickPrevPage}
           >
-            Назад
+            <FormattedMessage id="filters.buttonBack" defaultMessage="Back"/>
           </button>
           <button
             type="button"
@@ -50,10 +51,16 @@ class Filters extends React.Component {
             disabled={total_pages && total_pages <= page}
             onClick={this.onClickNextPage}
           >
-            Вперед
+            <FormattedMessage id="filters.buttonNext" defaultMessage="Next"/>
           </button>
         </div>
-        <span className="btn float-right">{page} із {total_pages ? total_pages : page}</span>
+        <span className="btn float-right">
+          <FormattedMessage
+            id="filters.pages"
+            values={{n: page,  m: total_pages ? total_pages : page}}
+            defaultMessage="{n} of {m}"
+          />
+        </span>
       </form>
     );
   }
@@ -68,4 +75,4 @@ Filters.propTypes = {
   onResetFilters: PropTypes.func.isRequired
 };
 
-export default Filters;
+export default injectIntl(Filters);

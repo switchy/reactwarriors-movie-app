@@ -1,6 +1,7 @@
 import React from "react";
 import Filters from "./Filters/Filters";
 import MoviesList from "./Movies/MoviesList";
+import { FormattedMessage } from 'react-intl';
 
 export default class App extends React.Component {
   constructor() {
@@ -53,7 +54,7 @@ export default class App extends React.Component {
             <div className="card" style={{ width: "100%" }}>
               <div className="card-body">
                 {process.env.R}
-                <h3>Фильтри:</h3>
+                <h3><FormattedMessage id="app.filters" defaultMessage="Filters"/>:</h3>
                 <Filters
                   filters={filters}
                   page={page}
