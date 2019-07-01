@@ -4,6 +4,7 @@ import { Spinner } from "reactstrap";
 import UIFormTextField from "../../UIComponents/UIFormTextField";
 import { injectIntl, FormattedMessage } from 'react-intl';
 import {API_KEY_3, API_URL, fetchApi} from "../../../api/api";
+import PropTypes from "prop-types";
 
 class LoginForm extends React.Component {
   constructor() {
@@ -218,5 +219,11 @@ class LoginForm extends React.Component {
     );
   }
 };
+
+LoginForm.propTypes = {
+  updateUser: PropTypes.func.isRequired,
+  updateSessionId: PropTypes.func.isRequired,
+};
+
 
 export default injectIntl(LoginForm);
