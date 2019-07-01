@@ -12,5 +12,17 @@
   "sortby.opts.vote_average.desc": "Bewertung absteigend",
   "sortby.opts.vote_average.asc": "Bewertung aufsteigend",
   "movieitem.Rating": "Bewertung",
-  "movielist.NotFound": "Nichts gefunden."
+  "movielist.NotFound": "Nichts gefunden.",
+  "login.signin": "Zulassung",
+  "login.buttonEnter": "Einloggen",
+  "login.buttonSignIn": "Einloggen",
+  "login.buttonSignOut": "Ausloggen",
+  "login.usernameLabel": "Benutzer",
+  "login.usernamePlaceholder": "Benutzername eingeben",
+  "login.passwordLabel": "Passwort",
+  "login.passwordPlaceholder": "Geben Sie Passwort an",
+  "login.passwordPlaceholder": "Enter password",
+  "login.repeatPasswordLabel": "Passwort wiederholen",
+  "login.validate.notEmpty": "Muss eingestellt werden",
+  "login.validate.passwordMustEq": "Passwort muss zusammenfallen"
 }

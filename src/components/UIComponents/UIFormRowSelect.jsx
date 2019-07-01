@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 class UIFormRowSelect extends React.Component {
 
   render() {
-    const { label, name, value, options, onChange } = this.props;
+    const { label, key2, name, value, options, onChange } = this.props;
 
     return (
       <div className="form-group">
-        <label htmlFor={name}>{label}:</label>
+        <label htmlFor={name}>{label}{key2}:</label>
         <select
           className="form-control"
           id={name}

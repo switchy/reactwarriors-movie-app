@@ -36,6 +36,7 @@ class SortBy extends React.PureComponent {
     const options = this.listOptions;
     return (
       <UIFormRowSelect
+        key={this.props.intl.locale}
         label={this.props.intl.formatMessage({id:"filters.SortBy", defaultMessage: "Sort by"})}
         name="sort_by"
         value={sort_by}

@@ -12,5 +12,17 @@
   "sortby.opts.vote_average.desc": "Рейтинг за спаданням",
   "sortby.opts.vote_average.asc": "Рейтинг за зростанням",
   "movieitem.Rating": "Рейтинг",
-  "movielist.NotFound": "Нічого не знайдено."
+  "movielist.NotFound": "Нічого не знайдено.",
+  "login.signin": "Авторизація",
+  "login.buttonEnter": "Увійти",
+  "login.buttonSignIn": "Увійти",
+  "login.buttonSignOut": "Вийти",
+  "login.usernameLabel": "Користувач",
+  "login.usernamePlaceholder": "Вкажіть імʼя користувача",
+  "login.passwordLabel": "Пароль",
+  "login.repeatPasswordLabel": "Повторіть пароль",
+  "login.repeatPasswordPlaceholder": "Вкажіть пароль знову",
+  "login.passwordPlaceholder": "Важіть пароль",
+  "login.validate.notEmpty": "Необхідно зазначити",
+  "login.validate.passwordMustEq": "Пароль і повтор повинні співпадати"
 }
