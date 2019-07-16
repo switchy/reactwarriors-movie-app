@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames/bind";
 
 class UIFormTextField extends React.Component {
 
@@ -29,7 +30,7 @@ class UIFormTextField extends React.Component {
         <label htmlFor={id}>{labelText}</label>
         <input
           type={type}
-          className={`form-control ${error ? " is-invalid" : ""}`}
+          className={classNames("form-control", {"is-invalid": error})}
           name={name}
           id={id}
           value={value}
