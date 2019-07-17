@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import MovieItem from "./MovieItem";
 import queryString from 'query-string';
+import { Spinner } from "reactstrap";
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { API_URL, API_KEY_3 } from "../../api/api";
 
@@ -10,7 +11,8 @@ class MovieList extends Component {
     super();
 
     this.state = {
-      movies: []
+      movies: [],
+      loader: false
     };
   }
 
@@ -32,16 +34,26 @@ class MovieList extends Component {
 
     let link = `${API_URL}/discover/movie?${queryString.stringify(linkQueryParams)}`;
 
+    this.setState({
+      loader: true
+    });
+
     fetch(link)
       .then(response => {
         return response.json();
       })
       .then(data => {
         this.setState({
-          movies: data.results
+          movies: data.results,
+          loader: false
         });
 
         this.props.onChangeTotalPages(data.total_pages)
+      })
+      .catch( () => {
+        this.setStat({
+          loader: false
+        })
       });
   };
 
@@ -58,13 +70,18 @@ class MovieList extends Component {
     if (prevProps.filters !== this.props.filters) {
       this.props.onChangePage(1);
       this.getMovies(this.props.filters, 1);
-      return;
     }
 
   }
 
   render() {
-    const { movies } = this.state;
+    const { movies, loader } = this.state;
+    if (loader) {
+      return (
+        <Spinner type="border" size="lg"/>
+      )
+    }
+
     if (!movies.length) {
       return (
         <div className="alert alert-warning">
