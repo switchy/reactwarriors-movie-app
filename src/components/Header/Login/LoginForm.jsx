@@ -137,17 +137,16 @@ class LoginForm extends React.Component {
   onLogin = (e) => {
     e.preventDefault();
     const errors = this.validateFields();
-    if (Object.keys(errors).length) {
+    if (!Object.keys(errors).length) {
+      this.onSubmit();
+    } else {
       this.setState(prevState => ({
         errors: {
           ...prevState.errors,
           ...errors
         }
       }));
-      return;
     }
-
-    this.onSubmit();
 
   };
 
