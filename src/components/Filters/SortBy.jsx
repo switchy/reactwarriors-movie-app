@@ -5,27 +5,23 @@ import UIFormRowSelect from '../UIComponents/UIFormRowSelect';
 
 class SortBy extends React.PureComponent {
 
-  constructor() {
-    super();
-    this.listOptions = []
-  };
-
-  componentWillMount() {
+  constructor(props) {
+    super(props);
     this.listOptions = [
       {
-        label: this.props.intl.formatMessage({id: "sortby.opts.popularity.desc", defaultMessage: "Popular by descending"}),
+        label: props.intl.formatMessage({id: "sortby.opts.popularity.desc", defaultMessage: "Popular by descending"}),
         value: "popularity.desc"
       },
       {
-        label: this.props.intl.formatMessage({id: "sortby.opts.popularity.asc", defaultMessage: "Popular ascending"}),
+        label: props.intl.formatMessage({id: "sortby.opts.popularity.asc", defaultMessage: "Popular ascending"}),
         value: "popularity.asc"
       },
       {
-        label: this.props.intl.formatMessage({id: "sortby.opts.vote_average.desc", defaultMessage: "Rating by descending"}),
+        label: props.intl.formatMessage({id: "sortby.opts.vote_average.desc", defaultMessage: "Rating by descending"}),
         value: "vote_average.desc"
       },
       {
-        label: this.props.intl.formatMessage({id: "sortby.opts.vote_average.asc", defaultMessage: "Rating ascending"}),
+        label: props.intl.formatMessage({id: "sortby.opts.vote_average.asc", defaultMessage: "Rating ascending"}),
         value: "vote_average.asc"
       },
     ];
