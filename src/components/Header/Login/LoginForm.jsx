@@ -13,7 +13,7 @@ class LoginForm extends React.Component {
       "username": "",
       "password": "",
       "repeatPassword": "",
-      "_subbmittig": false,
+      "submitting": false,
       "errors": {}
     };
 
@@ -67,7 +67,7 @@ class LoginForm extends React.Component {
   onSubmit = () => {
 
     this.setState({
-      _subbmittig: true,
+      submitting: true,
       errors: {}
     });
 
@@ -118,7 +118,7 @@ class LoginForm extends React.Component {
       .then(data => {
         this.props.updateUser(data);
         this.setState({
-            _subbmittig: false
+            submitting: false
         });
 
       })
@@ -128,7 +128,7 @@ class LoginForm extends React.Component {
             ...prevState.errors,
             base: error.status_message
           },
-          _subbmittig: false
+          submitting: false
         }));
 
       })
@@ -156,7 +156,7 @@ class LoginForm extends React.Component {
     return (
       <div className="form-login-container">
         <h1 className="h3 text-center">
-          {this.state._subbmittig &&
+          {this.state.submitting &&
             <Spinner type="grow" />
           }
           <FormattedMessage id="login.signin" defaultMessage="Signin"/>
@@ -171,7 +171,7 @@ class LoginForm extends React.Component {
             onChange={this.onChange}
             onBlur={this.handleBlur}
             value={this.state.username}
-            error={"username" in errors ? errors.username : ""}
+            error={errors.username}
           />
 
           <UIFormTextField
@@ -183,7 +183,7 @@ class LoginForm extends React.Component {
             onChange={this.onChange}
             onBlur={this.handleBlur}
             value={this.state.password}
-            error={"password" in errors ? errors.password : ""}
+            error={errors.password}
           />
 
           <UIFormTextField
@@ -195,12 +195,12 @@ class LoginForm extends React.Component {
             onChange={this.onChange}
             onBlur={this.handleBlur}
             value={this.state.repeatPassword}
-            error={"repeatPassword" in errors ? errors.repeatPassword : ""}
+            error={errors.repeatPassword}
           />
 
           <button
             type="submit"
-            disabled={this.state._subbmittig}
+            disabled={this.state.submitting}
             className="btn btn-lg btn-primary btn-block"
             onClick={this.onLogin}
           >
@@ -218,7 +218,7 @@ class LoginForm extends React.Component {
       </div>
     );
   }
-};
+}
 
 LoginForm.propTypes = {
   updateUser: PropTypes.func.isRequired,
