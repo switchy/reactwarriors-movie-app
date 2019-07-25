@@ -116,9 +116,10 @@ class LoginForm extends React.Component {
         return fetchApi(`${API_URL}/account?${queryString.stringify(linkQueryParams)}`)
       })
       .then(data => {
-        this.props.updateUser(data);
         this.setState({
             submitting: false
+        }, () => {
+          this.props.updateUser(data);
         });
 
       })
@@ -186,11 +187,11 @@ class LoginForm extends React.Component {
           />
 
           <UIFormTextField
-            labelText={this.props.intl.formatMessage({id:"login.repasswordLabel", defaultMessage: "Repeat Password"})}
+            labelText={this.props.intl.formatMessage({id:"login.repeatPasswordLabel", defaultMessage: "Repeat Password"})}
             type="password"
             id="repeatPassword"
             name="repeatPassword"
-            placeHolder={this.props.intl.formatMessage({id:"login.repasswordPlaceholder", defaultMessage: "Enter repeat password"})}
+            placeHolder={this.props.intl.formatMessage({id:"login.repeatPasswordPlaceholder", defaultMessage: "Enter repeat password"})}
             onChange={this.onChange}
             onBlur={this.handleBlur}
             value={this.state.repeatPassword}
