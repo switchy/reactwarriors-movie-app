@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import MovieItem from "./MovieItem";
 import queryString from 'query-string';
+import _ from "lodash";
 import { Spinner } from "reactstrap";
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { API_URL, API_KEY_3 } from "../../api/api";
@@ -78,7 +79,25 @@ class MovieList extends Component {
     const { movies, loader } = this.state;
     if (loader) {
       return (
-        <Spinner type="border" size="lg"/>
+        <div className="row">
+          {_.times(3, (i) => (
+            <div key={i} className="col-6 mb-4">
+              <div className="card" style={{width: "100%"}}>
+                <img
+                  className="card-img-top card-img--height"
+                  src={"/static/noname-poster.png"}
+                  alt=""
+                />
+                <div className="card-body">
+                  <h6 className="card-title"><Spinner type="border" size="sm"/></h6>
+                  <div className="card-text">
+                    <FormattedMessage id="movieitem.Rating" defaultMessage="Rating"/>: ___
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       )
     }
 

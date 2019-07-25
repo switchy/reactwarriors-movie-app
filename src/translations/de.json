@@ -21,8 +21,8 @@
   "login.usernamePlaceholder": "Benutzername eingeben",
   "login.passwordLabel": "Passwort",
   "login.passwordPlaceholder": "Geben Sie Passwort an",
-  "login.passwordPlaceholder": "Enter password",
   "login.repeatPasswordLabel": "Passwort wiederholen",
+  "login.repeatPasswordPlaceholder": "Geben Sie Password wieder ein",
   "login.validate.notEmpty": "Muss eingestellt werden",
   "login.validate.passwordMustEq": "Passwort muss zusammenfallen"
 }
